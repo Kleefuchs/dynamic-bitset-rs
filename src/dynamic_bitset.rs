@@ -78,16 +78,8 @@ impl<const SIZE: usize> DynamicBitset<SIZE> {
         self.set_from_array_and_inner_index(quotient, remainder, state)
     }
 
-    pub fn resize(&mut self, new_len: usize) -> Result<(), String> {
-        match new_len < self.data.len() {
-            true => {
-                Err("Provided length is shorter than current length".to_string())
-            },
-            false => {
-                self.data.resize(new_len, 0);
-                Ok(())
-            },
-        }
+    pub fn resize(&mut self, new_len: usize) {
+        self.data.resize(new_len, 0);
     }
 
     pub fn push(&mut self, value: u32) {
@@ -101,6 +93,8 @@ impl<const SIZE: usize> DynamicBitset<SIZE> {
         self.data.pop();
     }
 }
+
+
 
 #[cfg(test)]
 mod tests {
@@ -120,7 +114,7 @@ mod tests {
         let mut dynamic_bitset: dynamic_bitset::DynamicBitset<1> = dynamic_bitset::DynamicBitset::new();
         dynamic_bitset.set(5, true).expect("Out of bounds in testing set");
 
-        assert_eq!(dynamic_bitset.resize(3), Ok(()));
+        dynamic_bitset.resize(3);
         assert_eq!(dynamic_bitset.data_len(), 3);
         assert_eq!(dynamic_bitset.get(5), Ok(true));
         assert_eq!(dynamic_bitset.get(85), Ok(false));

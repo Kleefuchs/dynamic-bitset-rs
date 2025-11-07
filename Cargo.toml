@@ -1,7 +1,14 @@
 [package]
 name = "dynamic_bitset"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2024"
+license = "MIT"
+keywords = ["bitset", "serde", "dynamic", "boolean", "bitshift"]
+categories = ["data-structure"]
+description = "A dynamic bitset using a vector to store 32 bit unsigned integers.\nProvides a serde feature flag to enable Serialization and Deserialization of bitset"
+readme = "README.md"
+repository = "https://github.com/Kleefuchs/serde-json-file-io-rs"
+
 
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"], optional = true }
